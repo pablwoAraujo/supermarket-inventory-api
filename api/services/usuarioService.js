@@ -32,11 +32,19 @@ class UsuarioService {
   }
 
   async buscarTodosUsuarios() {
-    return null;
+    const usuarios = await database.usuarios.findAll();
+    return usuarios
   }
 
   async buscarUsuarioPorId(id) {
-    return null;
+    const usuario = await database.usuarios.findOne({
+      where: { id }
+    });
+
+    if (!usuario) {
+      throw new Error('Usuário informado não cadastrado!')
+    }
+    return usuario
   }
 
   async deletarUsuarioPorId(id) {

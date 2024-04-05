@@ -16,11 +16,18 @@ class UsuarioController {
   }
 
   static async buscarTodosUsuarios(req, res) {
-    res.status(204).send();
+    const usuarios = await usuarioService.buscarTodosUsuarios();
+    res.status(200).json(usuarios);
   }
 
   static async buscarUsuarioPorId(req, res) {
-    res.status(204).send();
+    try {
+      const { id } = req.params;
+      const usuario = await usuarioService.buscarUsuarioPorId(id);
+      res.status(200).json(usuario);
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
   }
 
   static async deletarUsuarioPorId(req, res) {
