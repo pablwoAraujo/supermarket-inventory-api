@@ -48,7 +48,15 @@ class UsuarioService {
   }
 
   async deletarUsuarioPorId(id) {
-    return null;
+    await this.buscarUsuarioPorId(id);
+
+    try {
+      await database.usuarios.destroy({
+        where: { id }
+      });
+    } catch (error) {
+      throw new Error('Erro ao tentar deletar o usuario!')
+    }
   }
 
   async editarUsuario(dto) {

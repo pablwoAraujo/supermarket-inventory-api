@@ -31,7 +31,13 @@ class UsuarioController {
   }
 
   static async deletarUsuarioPorId(req, res) {
-    res.status(204).send();
+    const { id } = req.params
+    try {
+      await usuarioService.deletarUsuarioPorId(id)
+      res.status(200).send({ message: 'Usuario deletado com sucesso!' })
+    } catch (error) {
+      res.status(400).send({ message: error.message })
+    }
   }
 
   static async editarUsuario(req, res) {
