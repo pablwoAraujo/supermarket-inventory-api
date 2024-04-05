@@ -42,7 +42,7 @@ class UsuarioService {
     });
 
     if (!usuario) {
-      throw new Error('Usuário informado não cadastrado!')
+      throw new Error('Usuário informado não cadastrado!');
     }
     return usuario
   }
@@ -55,12 +55,21 @@ class UsuarioService {
         where: { id }
       });
     } catch (error) {
-      throw new Error('Erro ao tentar deletar o usuario!')
+      throw new Error('Erro ao tentar deletar o usuário!');
     }
   }
 
   async editarUsuario(dto) {
-    return null;
+    const usuario = await this.buscarUsuarioPorId(dto.id);
+
+    try {
+      usuario.nome = dto.nome;
+      usuario.email = dto.email;
+      await usuario.save();
+      return usuario;
+    } catch (error) {
+      throw new Error('Erro ao editar usuário!');
+    }
   }
 }
 

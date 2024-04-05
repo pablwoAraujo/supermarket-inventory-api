@@ -41,7 +41,14 @@ class UsuarioController {
   }
 
   static async editarUsuario(req, res) {
-    res.status(204).send();
+    const { id } = req.params;
+    const { nome, email } = req.body;
+    try {
+      const usuario = await usuarioService.editarUsuario({ id, nome, email });
+      res.status(200).json(usuario);
+    } catch (error) {
+      res.status(400).send({ message: error.message });
+    }
   }
 }
 
