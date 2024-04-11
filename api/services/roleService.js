@@ -28,7 +28,9 @@ class RoleService {
   }
 
   async buscarTodasAsRoles() {
-    return true;
+    const roles = await database.roles.findAll()
+
+    return roles;
   }
 
   async buscarRolePorId(id) {

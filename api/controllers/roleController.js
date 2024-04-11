@@ -15,7 +15,9 @@ class RoleController {
   }
 
   static async buscarTodasAsRoles(req, res) {
-    res.status(201).send();
+    const roles = await roleService.buscarTodasAsRoles();
+
+    res.status(200).json(roles);
   }
 
   static async buscarRolePorId(req, res) {
