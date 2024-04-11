@@ -34,7 +34,15 @@ class RoleService {
   }
 
   async buscarRolePorId(id) {
-    return true;
+    const role = await database.roles.findOne({
+      where: { id }
+    });
+
+    if (!role) {
+      throw new Error('Role informada não existe!')
+    }
+
+    return role;
   }
 
   async editarRolePorId(id) {

@@ -21,7 +21,15 @@ class RoleController {
   }
 
   static async buscarRolePorId(req, res) {
-    res.status(201).send();
+    try {
+      const { id } = req.params;
+      const role = await roleService.buscarRolePorId(id);
+
+      res.status(200).json(role);
+    } catch (error) {
+      console.log('Message error: ', error.message);
+      res.status(404).send({ message: error.message });
+    }
   }
 
   static async editarRolePorId(req, res) {
