@@ -33,11 +33,30 @@ class RoleController {
   }
 
   static async editarRolePorId(req, res) {
-    res.status(201).send();
+    const { id } = req.params;
+    const { nome, descricao } = req.body;
+
+    try {
+      const role = await roleService.editarRolePorId({ id, nome, descricao });
+
+      res.status(200).json(role);
+    } catch (error) {
+      console.log('Message error: ', error.message);
+      res.status(400).send({ message: error.message });
+    }
   }
 
   static async deletarRolePorId(req, res) {
-    res.status(201).send();
+    const { id } = req.params;
+
+    try {
+      await roleService.deletarRolePorId(id);
+
+      res.status(200).send({ message: 'Role deletada com sucesso!' });
+    } catch (error) {
+      console.log('Message error: ', error.message);
+      res.status(400).send({ message: error.message });
+    }
   }
 }
 

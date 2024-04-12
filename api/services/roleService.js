@@ -28,7 +28,7 @@ class RoleService {
   }
 
   async buscarTodasAsRoles() {
-    const roles = await database.roles.findAll()
+    const roles = await database.roles.findAll();
 
     return roles;
   }
@@ -39,19 +39,53 @@ class RoleService {
     });
 
     if (!role) {
-      throw new Error('Role informada não existe!')
+      throw new Error('Role informada não existe!');
     }
 
     return role;
   }
 
-  async editarRolePorId(id) {
-    return true;
+  async editarRolePorId(dto) {
+    const role = await database.roles.findOne({
+      where: {
+        id: dto.id
+      }
+    });
+
+    if (!role) {
+      throw new Error('Role informada não existe!');
+    }
+
+    try {
+      role.nome = dto.nome;
+      role.descricao = dto.descricao;
+
+      await role.save();
+      return await role.reload();
+    } catch (error) {
+      console.error('Message error: ', error.message);
+      throw error;
+    }
   }
 
-  async deletarRolePorId(dto) {
-    return true;
+  async deletarRolePorId(id) {
+    const role = await database.roles.findOne({
+      where: { id }
+    });
+
+    if (!role) {
+      throw new Error('Role informada não existe!');
+    }
+
+    try {
+      await database.roles.destroy({
+        where: { id }
+      });
+    } catch (error) {
+      console.error('Message error: ', error.message);
+      throw error;
+    }
   }
 }
 
-module.exports = RoleService
+module.exports = RoleService;
