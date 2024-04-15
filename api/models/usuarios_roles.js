@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     role_id: DataTypes.UUID
   }, {
     sequelize,
-    modelName: 'usuarios_role',
+    modelName: 'usuarios_roles',
   });
   return usuarios_role;
 };
