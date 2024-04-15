@@ -19,5 +19,7 @@ npx sequelize model:create --name usuarios --attributes nome:string,email:string
 
 npx sequelize model:create --name roles --attributes nome:string,descricao:string
 
+npx sequelize model:create --name permissoes --attributes nome:string,descricao:string
+
 npx sequelize db:migrate
 ```
