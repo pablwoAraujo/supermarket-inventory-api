@@ -21,5 +21,11 @@ npx sequelize model:create --name roles --attributes nome:string,descricao:strin
 
 npx sequelize model:create --name permissoes --attributes nome:string,descricao:string
 
+npx sequelize model:create --name usuarios_role --attributes usuario_id:uuid,role_id:uuid
+
+npx sequelize model:create --name usuarios_permissoes --attributes usuario_id:uuid,permissao_id:uuid
+
+npx sequelize model:create --name roles_permissoes --attributes role_id:uuid,permissao_id:uuid
+
 npx sequelize db:migrate
 ```
