@@ -15,6 +15,8 @@ docker start supermarket
 
 ### sequelize commands
 ```bash
+npx sequelize model:create --name produtos --attributes nome:string,descricao:string,preco:float
+
 npx sequelize model:create --name usuarios --attributes nome:string,email:string,senha:string
 
 npx sequelize model:create --name roles --attributes nome:string,descricao:string
